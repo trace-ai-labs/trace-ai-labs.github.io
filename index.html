@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TRACE AI Labs</title>
+<meta name="description" content="TRACE AI Labs is the joint research of Mika Okamoto and Ansel Erol on making AI agents trustworthy, auditable, and efficient." />
+<link rel="canonical" href="https://trace-ai-labs.github.io/" />
+<meta property="og:title" content="TRACE AI Labs" />
+<meta property="og:description" content="Research on trustworthy routing, agents, compliance, and efficiency." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://trace-ai-labs.github.io/" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23ffffff'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%232b5f9e' stroke-width='2.5'/%3E%3Ccircle cx='16' cy='16' r='2.6' fill='%23b6413f'/%3E%3C/svg%3E" />
+<style>
+  :root {
+    --bg: #fdfdfb;
+    --panel: #f4f3ee;
+    --text: #1b1b19;
+    --muted: #5f5f59;
+    --rule: #e0dfd8;
+    --link: #2b5f9e;
+    --serif: Charter, "Bitstream Charter", "Iowan Old Style", Georgia, Cambria, "Times New Roman", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16171a;
+      --panel: #1e2024;
+      --text: #e7e6e2;
+      --muted: #a0a09a;
+      --rule: #2e3136;
+      --link: #86b3e6;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.62;
+  }
+  .wrap {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem 4rem;
+  }
+  a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; }
+  a:hover { border-bottom-color: currentColor; }
+  p { margin: 0 0 1rem; }
+
+  header { margin-bottom: 2.75rem; }
+  h1 {
+    font-size: 1.75rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.3rem;
+  }
+  .tagline {
+    font-family: var(--sans);
+    font-size: 0.83rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 1.5rem;
+  }
+  .meta-links {
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin: 0;
+  }
+  .meta-links a + a::before { content: " · "; color: var(--muted); }
+
+  h2 {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    margin: 3rem 0 1.1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  h3 {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 2.25rem 0 0;
+    color: var(--text);
+  }
+  h3:first-of-type { margin-top: 0.25rem; }
+
+  .interests { margin: 0; padding: 0; list-style: none; }
+  .interests li { margin-bottom: 0.85rem; }
+  .interests strong { font-weight: 600; }
+
+  .paper {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .paper:last-child { border-bottom: none; }
+  .paper h4 {
+    font-size: 1.06rem;
+    font-weight: 600;
+    line-height: 1.35;
+    margin: 0 0 0.3rem;
+  }
+  .authors { margin: 0 0 0.15rem; }
+  .venue {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: 0 0 0.9rem;
+  }
+  .abstract { margin: 0 0 1rem; }
+
+  figure {
+    margin: 0 0 1rem;
+    padding: 0.9rem;
+    /* figures are line drawings on white, so the plate stays light in both themes */
+    background: #ffffff;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    text-align: center;
+  }
+  figure img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    max-height: 22rem;
+    width: auto;
+    height: auto;
+  }
+
+  .links {
+    font-family: var(--sans);
+    font-size: 0.9rem;
+  }
+  .links a + a::before { content: " · "; color: var(--muted); }
+
+  details { margin-top: 0.9rem; }
+  summary {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--muted);
+    cursor: pointer;
+    width: fit-content;
+  }
+  summary:hover { color: var(--text); }
+  pre {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    line-height: 1.5;
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 0.85rem 1rem;
+    margin: 0.7rem 0 0;
+    overflow-x: auto;
+  }
+
+  .people { margin: 0; padding: 0; list-style: none; }
+  .people li { margin-bottom: 0.5rem; }
+
+  footer {
+    margin-top: 3.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header>
+  <h1>TRACE AI Labs</h1>
+  <p class="tagline">Trustworthy Routing, Agents, Compliance, and Efficiency</p>
+  <p class="meta-links">
+    <a href="https://github.com/trace-ai-labs">GitHub</a>
+    <a href="mailto:mokamoto7@gatech.edu">Contact</a>
+  </p>
+</header>
+
+<section>
+  <p>TRACE AI Labs is the joint research of
+    <a href="https://mika-okamoto.github.io">Mika Okamoto</a> and
+    <a href="https://ansel.fyi">Ansel Erol</a>
+    on making AI agents trustworthy, auditable, and efficient. The name is also the point:
+    we care about leaving a clear <em>trace</em> — the audit trails that make agent behavior
+    explainable and verifiable.</p>
+  <p>Most of our work is empirical. We build evaluations that put agents in the situations
+    they will actually be deployed in — a rule in the system prompt, a user who wants it
+    bent, a budget that will not stretch — and measure what they do.</p>
+</section>
+
+<h2>What we work on</h2>
+<ul class="interests">
+  <li><strong>Agent compliance and enterprise AI.</strong> Whether agents actually follow
+    the rules they are given, which pressures break them, and why.</li>
+  <li><strong>LLM and agent routing.</strong> Explainable, cost-aware routing that picks the
+    right model for each task and shows its reasoning.</li>
+  <li><strong>Efficient AI.</strong> Frontier-level results under real cost and latency budgets.</li>
+</ul>
+<p>…and adjacent directions in agentic evaluation and explainability as they come up.</p>
+
+<h2>Papers</h2>
+
+<h3>Agent compliance and enterprise AI</h3>
+
+<article class="paper">
+  <h4>PACT: Can Enterprise AI Assistants Be Trusted Under Pressure?</h4>
+  <p class="authors">Mika Okamoto, Ansel Kaplan Erol</p>
+  <p class="venue">Preprint, 2026 · under review</p>
+  <p class="abstract">PACT (Pressure-Applied Compliance Testing) asks whether enterprise AI
+    assistants keep following company rules when violating them is the convenient choice: a
+    deadline looms, a manager says to make an exception, or the user pushes back. Its 3,364
+    items each pair a rule with a shortcut that violates it, set in realistic multi-turn
+    workplace conversations across 48 scenarios, 12 regulated domains, and nine
+    psychology-grounded pressures. Across 22 models, ordinary pressure raises violation rates
+    by 65%, and no model clears the bar for unsupervised use.</p>
+  <figure>
+    <a href="assets/pact.png"><img src="assets/pact.png" alt="Overview of the PACT benchmark: 12 regulated domains, 9 pressures, and 48 scenarios feeding a multi-turn conversation that is scored into PACTScore and a six-metric profile." /></a>
+  </figure>
+  <p class="links">
+    <a href="https://trace-ai-labs.github.io/pact/paper.pdf">Paper</a>
+    <a href="https://doi.org/10.13140/RG.2.2.33293.50407">Preprint DOI</a>
+    <a href="https://trace-ai-labs.github.io/pact/">Interactive results</a>
+    <a href="https://github.com/trace-ai-labs/pact">Code</a>
+    <a href="https://huggingface.co/datasets/trace-ai-labs/pact">Dataset</a>
+  </p>
+  <details>
+    <summary>BibTeX</summary>
+<pre>@misc{okamoto2026pact,
+  title  = {PACT: Can Enterprise AI Assistants Be Trusted Under Pressure?},
+  author = {Okamoto, Mika and Erol, Ansel Kaplan},
+  year   = {2026},
+  note   = {Under review},
+}</pre>
+  </details>
+</article>
+
+<article class="paper">
+  <h4>Why Do AI Agents Break Rules? How Framing, Context, and Social Signals Shape Compliance</h4>
+  <p class="authors">Mika Okamoto, Ansel Kaplan Erol, Kutluhan Erol</p>
+  <p class="venue">AIES 2026 · also at the COLM 2026 Workshop on Agent Behavior</p>
+  <p class="abstract">Specifying a penalty can turn a legal obligation into a cost-benefit
+    calculation that favors violation. We test twelve instruction-tuned models deployed as
+    enterprise procurement chatbots against the predictions of deterrence, legitimacy, and
+    expressive law, using compliance theory from law and economics as a diagnostic. Under
+    identical conditions, compliance spans 46 percentage points across models, and models
+    differ in which pressure breaks them. Benchmark scores and developers' own descriptions
+    of post-training do not predict where a model falls.</p>
+  <figure>
+    <a href="assets/incentives.png"><img src="assets/incentives.png" alt="Experimental setup: a corporate LLM chatbot receives a system context with corporate policy, rule framing, financial pressures, and social norms, then chooses between an ISO-compliant and a non-compliant vendor." /></a>
+  </figure>
+  <p class="links">
+    <a href="https://arxiv.org/abs/2608.12323">Paper</a>
+    <a href="https://trace-ai-labs.github.io/ai-incentives/">Interactive results</a>
+    <a href="https://github.com/trace-ai-labs/llm-compliance">Code &amp; data</a>
+  </p>
+  <details>
+    <summary>BibTeX</summary>
+<pre>@inproceedings{okamoto2026legalincentives,
+  title     = {Why Do AI Agents Break Rules? How Framing, Context,
+               and Social Signals Shape Compliance},
+  author    = {Okamoto, Mika and Erol, Ansel Kaplan and Erol, Kutluhan},
+  booktitle = {AAAI/ACM Conference on AI, Ethics, and Society (AIES)},
+  year      = {2026},
+  eprint    = {2608.12323},
+  archivePrefix = {arXiv},
+}</pre>
+  </details>
+</article>
+
+<h3>Routing and explainability</h3>
+
+<article class="paper">
+  <h4>Explainable Model Routing for Agentic Workflows</h4>
+  <p class="authors">Mika Okamoto, Ansel Erol, Mark Riedl</p>
+  <p class="venue">Workshop on Human-Centered Explainable AI (HCXAI) at CHI 2026</p>
+  <p class="abstract">Agentic systems increasingly route subtasks across multiple specialized
+    models, but those routing decisions are opaque to the people relying on them. We propose
+    a framework for explaining model routing in natural language, so that multi-step
+    pipelines stay open to meaningful human oversight.</p>
+  <figure>
+    <a href="assets/topaz.png"><img src="assets/topaz.png" alt="Routing architecture: a workflow analysis runtime turns an agentic workflow into subtask profiles, one-time profile synthesis turns public benchmarks into a model skill matrix, and a routing engine matches skills against cost to assign models and emit a routing explanation." /></a>
+  </figure>
+  <p class="links">
+    <a href="https://arxiv.org/abs/2604.03527">Paper</a>
+  </p>
+  <details>
+    <summary>BibTeX</summary>
+<pre>@inproceedings{okamoto2026explainable,
+  title     = {Explainable Model Routing for Agentic Workflows},
+  author    = {Okamoto, Mika and Erol, Ansel and Riedl, Mark},
+  booktitle = {Workshop on Human-Centered Explainable AI (HCXAI) at CHI},
+  year      = {2026},
+  eprint    = {2604.03527},
+  archivePrefix = {arXiv},
+}</pre>
+  </details>
+</article>
+
+<article class="paper">
+  <h4>Trust by Design: Skill Profiles for Transparent, Cost-Aware LLM Routing</h4>
+  <p class="authors">Mika Okamoto, Ansel Erol, Glenn Matlin</p>
+  <p class="venue">MLSys Young Professionals Symposium (YPS) 2025</p>
+  <p class="abstract">BELLA builds interpretable skill profiles for candidate models and uses
+    them to match each incoming query to the most capable and cost-efficient one. Routing
+    decisions stay transparent and grounded in empirically measured competencies rather than
+    a learned black box.</p>
+  <figure>
+    <a href="assets/bella.png"><img src="assets/bella.png" alt="Two-stage pipeline: profiling runs tasks through a benchmarker and a critic-LLM skill profiler to produce cost/performance metrics and skill matrices, which train a model selector that returns a best model plus a selection rationale for each new application." /></a>
+  </figure>
+  <p class="links">
+    <a href="https://arxiv.org/abs/2602.02386">Paper</a>
+  </p>
+  <details>
+    <summary>BibTeX</summary>
+<pre>@inproceedings{okamoto2025bella,
+  title     = {Trust by Design: Skill Profiles for Transparent,
+               Cost-Aware LLM Routing},
+  author    = {Okamoto, Mika and Erol, Ansel and Matlin, Glenn},
+  booktitle = {MLSys Young Professionals Symposium (YPS)},
+  year      = {2025},
+  eprint    = {2602.02386},
+  archivePrefix = {arXiv},
+}</pre>
+  </details>
+</article>
+
+<h2>People</h2>
+<ul class="people">
+  <li><a href="https://mika-okamoto.github.io">Mika Okamoto</a> — co-founder and lead researcher</li>
+  <li><a href="https://ansel.fyi">Ansel Erol</a> — co-founder</li>
+</ul>
+
+<footer>
+  <p>Code and data for every paper are on <a href="https://github.com/trace-ai-labs">GitHub</a>.
+  Questions or collaborations: <a href="mailto:mokamoto7@gatech.edu">mokamoto7@gatech.edu</a>.</p>
+</footer>
+
+</div>
+
+</body>
+</html>
