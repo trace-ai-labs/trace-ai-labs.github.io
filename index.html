@@ -165,8 +165,8 @@
     overflow-x: auto;
   }
 
-  .people { margin: 0; padding: 0; list-style: none; }
-  .people li { margin-bottom: 0.5rem; }
+  .people { margin: 0; }
+  .people a + a::before { content: " · "; color: var(--muted); }
 
   footer {
     margin-top: 3.5rem;
@@ -195,21 +195,17 @@
   <p>TRACE AI Labs is the joint research of
     <a href="https://mika-okamoto.github.io">Mika Okamoto</a> and
     <a href="https://ansel.fyi">Ansel Erol</a>
-    on making AI agents trustworthy, auditable, and efficient. The name is also the point:
-    we care about leaving a clear <em>trace</em> — the audit trails that make agent behavior
-    explainable and verifiable.</p>
-  <p>Most of our work is empirical. We build evaluations that put agents in the situations
-    they will actually be deployed in — a rule in the system prompt, a user who wants it
-    bent, a budget that will not stretch — and measure what they do.</p>
+    on making AI agents trustworthy, auditable, and efficient. We care about leaving a clear
+    <em>trace</em> — the audit trails that make agent behavior explainable and verifiable.</p>
 </section>
 
 <h2>What we work on</h2>
 <ul class="interests">
-  <li><strong>Agent compliance and enterprise AI.</strong> Whether agents actually follow
-    the rules they are given, which pressures break them, and why.</li>
-  <li><strong>LLM and agent routing.</strong> Explainable, cost-aware routing that picks the
+  <li><strong>Agent compliance &amp; enterprise AI</strong> — whether agents actually follow
+    the rules they're given, and why they don't.</li>
+  <li><strong>LLM &amp; agent routing</strong> — explainable, cost-aware routing that picks the
     right model for each task and shows its reasoning.</li>
-  <li><strong>Efficient AI.</strong> Frontier-level results under real cost and latency budgets.</li>
+  <li><strong>Efficient AI</strong> — frontier-level results under real cost and latency budgets.</li>
 </ul>
 <p>…and adjacent directions in agentic evaluation and explainability as they come up.</p>
 
@@ -221,13 +217,13 @@
   <h4>PACT: Can Enterprise AI Assistants Be Trusted Under Pressure?</h4>
   <p class="authors">Mika Okamoto, Ansel Kaplan Erol</p>
   <p class="venue">Preprint, 2026 · under review</p>
-  <p class="abstract">PACT (Pressure-Applied Compliance Testing) asks whether enterprise AI
-    assistants keep following company rules when violating them is the convenient choice: a
-    deadline looms, a manager says to make an exception, or the user pushes back. Its 3,364
-    items each pair a rule with a shortcut that violates it, set in realistic multi-turn
-    workplace conversations across 48 scenarios, 12 regulated domains, and nine
-    psychology-grounded pressures. Across 22 models, ordinary pressure raises violation rates
-    by 65%, and no model clears the bar for unsupervised use.</p>
+  <p class="abstract">PACT (Pressure-Applied Compliance Testing) is a novel benchmark testing
+    whether enterprise AI assistants keep following company rules when violating them is the
+    convenient choice: a deadline looms, a manager says to make an exception, or the user pushes
+    back. Its 3,364 items each pair a rule with a shortcut that violates it, set in realistic
+    multi-turn workplace conversations across 48 scenarios, 12 regulated domains, and nine
+    psychology-grounded pressures. Across 22 models, ordinary pressure raises violation rates by
+    65% and no model clears the bar for unsupervised use.</p>
   <figure>
     <a href="assets/pact.png"><img src="assets/pact.png" alt="Overview of the PACT benchmark: 12 regulated domains, 9 pressures, and 48 scenarios feeding a multi-turn conversation that is scored into PACTScore and a six-metric profile." /></a>
   </figure>
@@ -253,13 +249,11 @@
   <h4>Why Do AI Agents Break Rules? How Framing, Context, and Social Signals Shape Compliance</h4>
   <p class="authors">Mika Okamoto, Ansel Kaplan Erol, Kutluhan Erol</p>
   <p class="venue">AIES 2026 · also at the COLM 2026 Workshop on Agent Behavior</p>
-  <p class="abstract">Specifying a penalty can turn a legal obligation into a cost-benefit
-    calculation that favors violation. We test twelve instruction-tuned models deployed as
-    enterprise procurement chatbots against the predictions of deterrence, legitimacy, and
-    expressive law, using compliance theory from law and economics as a diagnostic. Under
-    identical conditions, compliance spans 46 percentage points across models, and models
-    differ in which pressure breaks them. Benchmark scores and developers' own descriptions
-    of post-training do not predict where a model falls.</p>
+  <p class="abstract">We diagnose why AI agents violate legal constraints in enterprise
+    settings by mapping systematic compliance failure modes across 12 instruction-tuned
+    procurement chatbots. Safety-fine-tuned models remain broadly compliant, while
+    task-optimized and agentic models trade off compliance under weak regulatory signals,
+    non-command phrasing, and organizational pressures.</p>
   <figure>
     <a href="assets/incentives.png"><img src="assets/incentives.png" alt="Experimental setup: a corporate LLM chatbot receives a system context with corporate policy, rule framing, financial pressures, and social norms, then chooses between an ISO-compliant and a non-compliant vendor." /></a>
   </figure>
@@ -288,10 +282,10 @@
   <h4>Explainable Model Routing for Agentic Workflows</h4>
   <p class="authors">Mika Okamoto, Ansel Erol, Mark Riedl</p>
   <p class="venue">Workshop on Human-Centered Explainable AI (HCXAI) at CHI 2026</p>
-  <p class="abstract">Agentic systems increasingly route subtasks across multiple specialized
-    models, but those routing decisions are opaque to the people relying on them. We propose
-    a framework for explaining model routing in natural language, so that multi-step
-    pipelines stay open to meaningful human oversight.</p>
+  <p class="abstract">Agentic AI systems increasingly route subtasks across multiple
+    specialized models, but these routing decisions are opaque to end users. We propose a
+    framework for explaining model routing decisions in natural language, supporting
+    meaningful human oversight of multi-step pipelines.</p>
   <figure>
     <a href="assets/topaz.png"><img src="assets/topaz.png" alt="Routing architecture: a workflow analysis runtime turns an agentic workflow into subtask profiles, one-time profile synthesis turns public benchmarks into a model skill matrix, and a routing engine matches skills against cost to assign models and emit a routing explanation." /></a>
   </figure>
@@ -315,10 +309,10 @@
   <h4>Trust by Design: Skill Profiles for Transparent, Cost-Aware LLM Routing</h4>
   <p class="authors">Mika Okamoto, Ansel Erol, Glenn Matlin</p>
   <p class="venue">MLSys Young Professionals Symposium (YPS) 2025</p>
-  <p class="abstract">BELLA builds interpretable skill profiles for candidate models and uses
-    them to match each incoming query to the most capable and cost-efficient one. Routing
-    decisions stay transparent and grounded in empirically measured competencies rather than
-    a learned black box.</p>
+  <p class="abstract">We introduce BELLA, a routing system that constructs interpretable
+    skill profiles for LLMs to match incoming queries to the most capable and cost-efficient
+    model. Routing decisions stay transparent and grounded in empirically measured model
+    competencies.</p>
   <figure>
     <a href="assets/bella.png"><img src="assets/bella.png" alt="Two-stage pipeline: profiling runs tasks through a benchmarker and a critic-LLM skill profiler to produce cost/performance metrics and skill matrices, which train a model selector that returns a best model plus a selection rationale for each new application." /></a>
   </figure>
@@ -340,10 +334,10 @@
 </article>
 
 <h2>People</h2>
-<ul class="people">
-  <li><a href="https://mika-okamoto.github.io">Mika Okamoto</a> — co-founder and lead researcher</li>
-  <li><a href="https://ansel.fyi">Ansel Erol</a> — co-founder</li>
-</ul>
+<p class="people">
+  <a href="https://ansel.fyi">Ansel Erol</a>
+  <a href="https://mika-okamoto.github.io">Mika Okamoto</a>
+</p>
 
 <footer>
   <p>Code and data for every paper are on <a href="https://github.com/trace-ai-labs">GitHub</a>.
