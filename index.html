@@ -6,6 +6,7 @@
 <title>TRACE AI Labs</title>
 <meta name="description" content="TRACE AI Labs is the joint research of Mika Okamoto and Ansel Erol on making AI agents trustworthy, auditable, and efficient." />
 <link rel="canonical" href="https://trace-ai-labs.github.io/" />
+<meta name="google-site-verification" content="EOQQXJgUbXDEI7_NBVkNtaw4JLaw6M7sskAEAbnNJ2U" />
 <meta property="og:title" content="TRACE AI Labs" />
 <meta property="og:description" content="Research on trustworthy routing, agents, compliance, and efficiency." />
 <meta property="og:type" content="website" />
@@ -177,6 +178,20 @@
     color: var(--muted);
   }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ResearchOrganization",
+  "name": "TRACE AI Labs",
+  "url": "https://trace-ai-labs.github.io/",
+  "description": "Research on trustworthy routing, agents, compliance, and efficiency for AI systems.",
+  "sameAs": ["https://github.com/trace-ai-labs", "https://huggingface.co/trace-ai-labs"],
+  "member": [
+    {"@type": "Person", "name": "Mika Okamoto", "url": "https://mika-okamoto.github.io"},
+    {"@type": "Person", "name": "Ansel Kaplan Erol", "url": "https://ansel.fyi"}
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -228,7 +243,7 @@
     <a href="assets/pact.png"><img src="assets/pact.png" alt="Overview of the PACT benchmark: 12 regulated domains, 9 pressures, and 48 scenarios feeding a multi-turn conversation that is scored into PACTScore and a six-metric profile." /></a>
   </figure>
   <p class="links">
-    <a href="https://trace-ai-labs.github.io/pact/paper.pdf">Paper</a>
+    <a href="https://www.alphaxiv.org/pdf/2609.pact-enterprise-ai-compliance-testing">Paper</a>
     <a href="https://doi.org/10.13140/RG.2.2.33293.50407">Preprint DOI</a>
     <a href="https://trace-ai-labs.github.io/pact/">Interactive results</a>
     <a href="https://github.com/trace-ai-labs/pact">Code</a>
@@ -241,6 +256,36 @@
   author = {Okamoto, Mika and Erol, Ansel Kaplan},
   year   = {2026},
   note   = {Under review},
+}</pre>
+  </details>
+</article>
+
+<article class="paper">
+  <h4>Agent Memory Is a Surface for Endogenous Authorization Laundering</h4>
+  <p class="authors">Tommaso Cerruti, Mika Okamoto, Ansel Kaplan Erol</p>
+  <p class="venue">Preprint, 2026 · EleutherAI Summer of Open AI Research (SOAR), mentored by Trace AI Labs</p>
+  <p class="abstract">We study a failure mode where an agent's own persistent memory
+    accidentally creates authority that the underlying history never granted, without any
+    external attacker. Across procurement, cybersecurity, and finance, incremental memory
+    updates create false authority for up to 50.2% of unauthorized requests; once present,
+    executors act on it in 98.6% of trials. We also introduce EAL-Bench, an open-source
+    benchmark for studying these failures and potential mitigations.</p>
+  <figure>
+    <a href="assets/eal-bench.png"><img src="assets/eal-bench.png" alt="EAL-Bench system overview: a memory-writer agent compresses an organizational history of grants and amendments into persistent authorization memory, an executor acts on that memory plus a later request, and a hidden canonical ledger with a deterministic oracle scores each tool action as compliant or non-compliant." /></a>
+  </figure>
+  <p class="links">
+    <a href="https://arxiv.org/abs/2609.01836">Paper</a>
+    <a href="https://github.com/tommasocerruti/eal-bench">Code</a>
+  </p>
+  <details>
+    <summary>BibTeX</summary>
+<pre>@misc{cerruti2026agentmemory,
+  title  = {Agent Memory Is a Surface for Endogenous
+            Authorization Laundering},
+  author = {Cerruti, Tommaso and Okamoto, Mika and Erol, Ansel Kaplan},
+  year   = {2026},
+  eprint = {2609.01836},
+  archivePrefix = {arXiv},
 }</pre>
   </details>
 </article>
