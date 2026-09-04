@@ -1,0 +1,24 @@
+# TRACE AI Labs
+
+> TRACE AI Labs (Trustworthy Routing, Agents, Compliance, and Efficiency) is the joint research of Mika Okamoto and Ansel Kaplan Erol on AI agent compliance, LLM pressure testing, incentives, and explainable model routing. Site: https://trace-ai-labs.github.io/
+
+## Projects
+
+- [PACT: Pressure-Applied Compliance Testing](https://trace-ai-labs.github.io/pact/): an LLM compliance benchmark for enterprise AI assistants. 3,364 items pair a company rule with a convenient shortcut that violates it, in multi-turn workplace conversations across 48 scenarios, 12 regulated domains (healthcare, hiring, finance, AML/KYC, export controls, and more), and nine psychology-grounded pressures. 24 models scored on PACTScore and a six-axis profile (default compliance, pressure resistance, pushback resistance, steerability, transparency, rule-scope discernment). Paper (preprint, under review): https://trace-ai-labs.github.io/pact/paper.pdf. DOI: 10.13140/RG.2.2.33293.50407. Dataset (MIT): https://huggingface.co/datasets/trace-ai-labs/pact. Code: https://github.com/trace-ai-labs/pact
+- [What Makes AI Agents Follow the Rules?](https://trace-ai-labs.github.io/ai-incentives/): interactive results for "Why Do AI Agents Break Rules? How Framing, Context, and Social Signals Shape Compliance" (AIES 2026). How incentives, rule framing, enforcement, authority, peer signals, and user pressure change whether LLM agents deployed as workplace assistants follow regulations, across twelve models. arXiv: https://arxiv.org/abs/2608.12323. Code and data: https://github.com/trace-ai-labs/llm-compliance
+- [Explainable Model Routing for Agentic Workflows](https://arxiv.org/abs/2604.03527): CHI 2026 Workshop on Human-Centered Explainable AI.
+- [Trust by Design: Skill Profiles for Transparent, Cost-Aware LLM Routing](https://arxiv.org/abs/2602.02386): MLSys Young Professionals Symposium 2025.
+
+## Topics
+
+AI agent compliance, LLM compliance benchmark, LLM pressure testing, social pressure and sycophancy, multi-turn pushback, rule following and policy adherence, system prompt adherence, AI incentives and principal-agent problems, enterprise AI governance, regulated-domain AI safety, honesty and deception under pressure, agentic evaluation, explainable and cost-aware model routing.
+
+## Cite
+
+@misc{okamoto2026pact, title={PACT: Can Enterprise AI Assistants Be Trusted Under Pressure?}, author={Okamoto, Mika and Erol, Ansel Kaplan}, year={2026}, note={Under review}}
+
+@inproceedings{okamoto2026whydo, title={Why Do AI Agents Break Rules? How Framing, Context, and Social Signals Shape Compliance}, author={Okamoto, Mika and Erol, Ansel Kaplan and Erol, Kutluhan}, booktitle={AAAI/ACM Conference on AI, Ethics, and Society (AIES)}, year={2026}, eprint={2608.12323}, archivePrefix={arXiv}}
+
+## Contact
+
+mokamoto7@gatech.edu · https://github.com/trace-ai-labs
