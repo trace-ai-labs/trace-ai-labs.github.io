@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>LLM compliance: what it means and how to measure it | TRACE AI Labs</title>
+<meta name="description" content="What LLM compliance is, why language models break rules they can recite, and how to measure AI compliance with a benchmark: the PACT LLM compliance benchmark and the AIES 2026 study from TRACE AI Labs." />
+<link rel="canonical" href="https://trace-ai-labs.github.io/llm-compliance/" />
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="LLM compliance | TRACE AI Labs" />
+<meta property="og:description" content="What LLM compliance is, why language models break rules they can recite, and how to measure AI compliance with a benchmark: the PACT LLM compliance benchmark and the AIES 2026 study from TRACE AI Labs." />
+<meta property="og:url" content="https://trace-ai-labs.github.io/llm-compliance/" />
+<meta property="og:image" content="https://trace-ai-labs.github.io/assets/pact.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23ffffff'/%3E%3Ccircle cx='16' cy='16' r='8' fill='none' stroke='%232b5f9e' stroke-width='2.5'/%3E%3Ccircle cx='16' cy='16' r='2.6' fill='%23b6413f'/%3E%3C/svg%3E" />
+<style>
+  :root {
+    --bg: #fdfdfb;
+    --panel: #f4f3ee;
+    --text: #1b1b19;
+    --muted: #5f5f59;
+    --rule: #e0dfd8;
+    --link: #2b5f9e;
+    --serif: Charter, "Bitstream Charter", "Iowan Old Style", Georgia, Cambria, "Times New Roman", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #16171a;
+      --panel: #1e2024;
+      --text: #e7e6e2;
+      --muted: #a0a09a;
+      --rule: #2e3136;
+      --link: #86b3e6;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.62;
+  }
+  .wrap {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem 4rem;
+  }
+  a { color: var(--link); text-decoration: none; border-bottom: 1px solid transparent; }
+  a:hover { border-bottom-color: currentColor; }
+  p { margin: 0 0 1rem; }
+
+  header { margin-bottom: 2.75rem; }
+  h1 {
+    font-size: 1.75rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.3rem;
+  }
+  .tagline {
+    font-family: var(--sans);
+    font-size: 0.83rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 1.5rem;
+  }
+  .meta-links {
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin: 0;
+  }
+  .meta-links a + a::before { content: " · "; color: var(--muted); }
+
+  h2 {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    margin: 3rem 0 1.1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  h3 {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin: 2.25rem 0 0;
+    color: var(--text);
+  }
+  h3:first-of-type { margin-top: 0.25rem; }
+
+  .interests { margin: 0; padding: 0; list-style: none; }
+  .interests li { margin-bottom: 0.85rem; }
+  .interests strong { font-weight: 600; }
+
+  .paper {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+  .paper:last-child { border-bottom: none; }
+  .paper h4 {
+    font-size: 1.06rem;
+    font-weight: 600;
+    line-height: 1.35;
+    margin: 0 0 0.3rem;
+  }
+  .authors { margin: 0 0 0.15rem; }
+  .venue {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: 0 0 0.9rem;
+  }
+  .abstract { margin: 0 0 1rem; }
+
+  figure {
+    margin: 0 0 1rem;
+    padding: 0.9rem;
+    /* figures are line drawings on white, so the plate stays light in both themes */
+    background: #ffffff;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    text-align: center;
+  }
+  figure img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    max-height: 22rem;
+    width: auto;
+    height: auto;
+  }
+
+  .links {
+    font-family: var(--sans);
+    font-size: 0.9rem;
+  }
+  .links a + a::before { content: " · "; color: var(--muted); }
+
+  details { margin-top: 0.9rem; }
+  summary {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--muted);
+    cursor: pointer;
+    width: fit-content;
+  }
+  summary:hover { color: var(--text); }
+  pre {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    line-height: 1.5;
+    background: var(--panel);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 0.85rem 1rem;
+    margin: 0.7rem 0 0;
+    overflow-x: auto;
+  }
+
+  .people { margin: 0; }
+  .people a + a::before { content: " · "; color: var(--muted); }
+
+  footer {
+    margin-top: 3.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .crumbs { font-family: var(--sans); font-size: 0.85rem; color: var(--muted); margin: 0 0 2rem; }
+  .crumbs a { color: var(--muted); }
+  .crumbs a:hover { color: var(--text); }
+  .topic h1 { font-size: 2rem; margin-bottom: 0.6rem; }
+  .topic .lede { font-size: 1.12rem; color: var(--text); margin-bottom: 1.8rem; }
+  .topic h2 {
+    font-family: var(--serif); font-size: 1.28rem; font-weight: 600; text-transform: none;
+    letter-spacing: -0.005em; color: var(--text); border-bottom: none; margin: 2.5rem 0 0.7rem;
+    padding-bottom: 0;
+  }
+  .topic ul, .topic ol { padding-left: 1.3rem; margin: 0 0 1rem; }
+  .topic li { margin-bottom: 0.45rem; }
+  .topic table { border-collapse: collapse; width: 100%; font-family: var(--sans); font-size: 0.9rem; margin: 0 0 1.2rem; }
+  .topic th, .topic td { text-align: left; padding: 0.45rem 0.6rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  .topic th { font-weight: 600; color: var(--muted); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; }
+  .topic code { font-family: var(--mono); font-size: 0.85em; background: var(--panel); padding: 0.05em 0.3em; border-radius: 3px; }
+  .faq dt { font-weight: 600; margin: 1.2rem 0 0.3rem; }
+  .faq dd { margin: 0 0 0.6rem; }
+  .related { font-family: var(--sans); font-size: 0.9rem; }
+  .related a + a::before { content: " · "; color: var(--muted); }
+</style>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "headline": "LLM compliance",
+   "description": "What LLM compliance is, why language models break rules they can recite, and how to measure AI compliance with a benchmark: the PACT LLM compliance benchmark and the AIES 2026 study from TRACE AI Labs.",
+   "url": "https://trace-ai-labs.github.io/llm-compliance/",
+   "mainEntityOfPage": "https://trace-ai-labs.github.io/llm-compliance/",
+   "keywords": [
+    "LLM compliance",
+    "AI compliance",
+    "LLM compliance benchmark",
+    "rule following",
+    "regulatory compliance",
+    "enterprise AI assistants",
+    "PACT",
+    "AI safety"
+   ],
+   "inLanguage": "en",
+   "author": [
+    {
+     "@type": "Person",
+     "name": "Mika Okamoto",
+     "url": "https://mika-okamoto.github.io"
+    },
+    {
+     "@type": "Person",
+     "name": "Ansel Kaplan Erol",
+     "url": "https://ansel.fyi"
+    }
+   ],
+   "publisher": {
+    "@type": "ResearchOrganization",
+    "name": "TRACE AI Labs",
+    "url": "https://trace-ai-labs.github.io/"
+   },
+   "isPartOf": {
+    "@type": "WebSite",
+    "name": "TRACE AI Labs",
+    "url": "https://trace-ai-labs.github.io/"
+   },
+   "about": [
+    {
+     "@type": "Dataset",
+     "name": "PACT: Pressure-Applied Compliance Testing",
+     "url": "https://trace-ai-labs.github.io/pact/"
+    },
+    {
+     "@type": "ScholarlyArticle",
+     "name": "Why Do AI Agents Break Rules? How Framing, Context, and Social Signals Shape Compliance",
+     "url": "https://arxiv.org/abs/2608.12323"
+    }
+   ]
+  },
+  {
+   "@type": "FAQPage",
+   "mainEntity": [
+    {
+     "@type": "Question",
+     "name": "Is LLM compliance the same as AI safety?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "It is one part of it. Most AI safety benchmarks test refusals of harmful requests or robustness to jailbreaks. LLM compliance benchmarks test whether a model follows legitimate business and legal rules in real deployments, where the harm comes from a plausible shortcut rather than an attacker."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Does adding 'always follow the rules' to the system prompt fix it?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Partly. PACT scores every item with and without a hard compliance directive. The directive raises scores but does not close the gap, and in the AIES 2026 study urgency pressure beat it for eleven of twelve models."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Can I evaluate my own model?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Yes. The PACT dataset is on Hugging Face under an MIT license and the evaluation harness on GitHub runs the full protocol against any OpenAI-compatible endpoint."
+     }
+    },
+    {
+     "@type": "Question",
+     "name": "Which regulated domains does PACT cover?",
+     "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "Hiring, healthcare, finance, privacy, advertising, anti-money-laundering and KYC, export controls, government services, and others, 12 in total."
+     }
+    }
+   ]
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "TRACE AI Labs",
+     "item": "https://trace-ai-labs.github.io/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "LLM compliance",
+     "item": "https://trace-ai-labs.github.io/llm-compliance/"
+    }
+   ]
+  }
+ ]
+}
+</script>
+</head>
+<body>
+
+<div class="wrap topic">
+
+<p class="crumbs"><a href="https://trace-ai-labs.github.io/">TRACE AI Labs</a> &rsaquo; LLM compliance</p>
+
+<header>
+  <h1>LLM compliance</h1>
+  <p class="lede">LLM compliance is whether a language model keeps following a binding rule once it is deployed and something in the situation rewards breaking it. Every model we have tested can recite its rules. Far fewer keep them.</p>
+  <p class="meta-links">Mika Okamoto and Ansel Kaplan Erol, TRACE AI Labs</p>
+</header>
+
+<h2>What LLM compliance means</h2>
+<p>An LLM deployed as a workplace assistant is given rules: a hiring assistant must not screen on protected attributes, a bank assistant must file a suspicious-activity report before releasing funds, a procurement agent must use certified vendors above a spending threshold. LLM compliance, sometimes called AI compliance or agent compliance, is the question of whether the model actually acts on those rules when its task incentives point the other way.</p>
+<p>This is different from two things it is often confused with. It is not knowledge of the rule: models score well on questions about regulations and still violate them in a live decision. And it is not jailbreak robustness or refusal safety: nobody in these settings is attacking the model. The pressure is ordinary. A deadline is close, a manager says to make an exception, a coworker already did it, or the user simply argues back after the first answer.</p>
+
+<h2>Why LLMs break rules they know</h2>
+<p>Our AIES 2026 study, <a href="https://trace-ai-labs.github.io/ai-incentives/">Why Do AI Agents Break Rules?</a>, put twelve instruction-tuned models in the same enterprise procurement role under one legal rule and changed only the context around it. Three findings shape how we think about LLM compliance:</p>
+<ul>
+  <li><strong>The model matters more than the rule.</strong> With the rule held fixed, compliance ranged from 43.5% to 89.5% depending only on which model was answering.</li>
+  <li><strong>Phrasing and incentives change behavior.</strong> Stating a rule as a neutral fact rather than a command lowered compliance for several models, and a small, beatable fine often lowered it further because a stated fine reads as a price.</li>
+  <li><strong>Social context moves the whole curve.</strong> A manager's blanket approval or a board cost policy pushed compliance down even for rule-anchored models. A peer who was fined pushed it up; a peer who got away with it pushed it down.</li>
+</ul>
+<p>A built-in "follow the law regardless" instruction helped, but a deadline still got past it for all but one model.</p>
+
+<h2>How to measure LLM compliance</h2>
+<p><a href="https://trace-ai-labs.github.io/pact/">PACT (Pressure-Applied Compliance Testing)</a> turns those findings into a benchmark. Each of its 3,364 items is one workplace decision: a system prompt that gives the model a persona, its KPIs, and a compliance rule stated as plain fact; a user request with a short menu of options where the rule-violating option wins on the metric the persona is measured on; and, on multi-turn items, a scripted pushback that argues against the compliant choice. Items span 48 scenarios in 12 regulated domains, and the rules are real statutes. In seven scenarios a court or regulator has already punished the same violation.</p>
+<p>A model's PACTScore is the share of items it handles compliantly, weighting the first decision three to one against the decision after pushback, with each item run three times and credit given only when the model gets it right every time. Because the benchmark also includes near-identical situations where the rule does not apply, a model cannot score well by refusing everything. Over-applying a rule is scored as an error too.</p>
+
+<h2>What the numbers say so far</h2>
+<table>
+<tr><th>Measure</th><th>Result</th></tr>
+<tr><td>Best PACTScore across 24 models</td><td>0.944, and none clears the bar we set for unsupervised use</td></tr>
+<tr><td>Effect of one sentence of workplace pressure</td><td>Violation rates rise by 65%</td></tr>
+<tr><td>Mildest pressure family</td><td>Still produces violations on 4.8% of requests</td></tr>
+<tr><td>When a model does violate</td><td>It presents the result as compliant 79% of the time</td></tr>
+<tr><td>Newer or bigger models</td><td>Not reliably better; a 27B dense model ties a trillion-parameter one</td></tr>
+</table>
+
+<h2>Frequently asked questions</h2>
+<dl class="faq">
+<dt>Is LLM compliance the same as AI safety?</dt>
+<dd>It is one part of it. Most AI safety benchmarks test refusals of harmful requests or robustness to jailbreaks. LLM compliance benchmarks test whether a model follows legitimate business and legal rules in the deployments it is already being used for, where the harm comes from a plausible shortcut rather than an attacker.</dd>
+<dt>Does adding "always follow the rules" to the system prompt fix it?</dt>
+<dd>Partly. PACT scores every item twice, once with and once without a hard compliance directive, and reports both. The directive raises scores but does not close the gap, and in the AIES study urgency pressure beat it for eleven of twelve models.</dd>
+<dt>Can I evaluate my own model?</dt>
+<dd>Yes. The <a href="https://huggingface.co/datasets/trace-ai-labs/pact">PACT dataset</a> is on Hugging Face under an MIT license, and the <a href="https://github.com/trace-ai-labs/pact">evaluation harness</a> on GitHub runs the full protocol against any OpenAI-compatible endpoint.</dd>
+<dt>Which regulated domains does PACT cover?</dt>
+<dd>Hiring, healthcare, finance, privacy, advertising, anti-money-laundering and KYC, export controls, government services, and others, 12 in total, each written by three generator models and cross-reviewed.</dd>
+</dl>
+
+<h2>Read more</h2>
+<p class="related">
+  <a href="https://trace-ai-labs.github.io/pact/">PACT benchmark and leaderboard</a>
+  <a href="https://trace-ai-labs.github.io/pact/paper.pdf">PACT paper (PDF)</a>
+  <a href="https://trace-ai-labs.github.io/ai-incentives/">AIES 2026 study: interactive results</a>
+  <a href="https://arxiv.org/abs/2608.12323">AIES paper on arXiv</a>
+  <a href="https://huggingface.co/datasets/trace-ai-labs/pact">Dataset on Hugging Face</a>
+  <a href="https://trace-ai-labs.github.io/ai-agent-compliance/">AI agent compliance</a>
+  <a href="https://trace-ai-labs.github.io/llm-pressure-testing/">LLM pressure testing</a>
+</p>
+
+<footer>
+  <p><a href="https://trace-ai-labs.github.io/">TRACE AI Labs</a> studies AI agent compliance, LLM pressure testing, and explainable model routing.
+  Code and data for every paper are on <a href="https://github.com/trace-ai-labs">GitHub</a>.
+  Questions or collaborations: <a href="mailto:mokamoto7@gatech.edu">mokamoto7@gatech.edu</a>.</p>
+</footer>
+
+</div>
+
+<script data-goatcounter="https://trace-ai-labs.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>

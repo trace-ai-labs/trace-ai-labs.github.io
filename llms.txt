@@ -9,6 +9,12 @@
 - [Explainable Model Routing for Agentic Workflows](https://arxiv.org/abs/2604.03527): CHI 2026 Workshop on Human-Centered Explainable AI.
 - [Trust by Design: Skill Profiles for Transparent, Cost-Aware LLM Routing](https://arxiv.org/abs/2602.02386): MLSys Young Professionals Symposium 2025.
 
+## Explainers
+
+- [LLM compliance](https://trace-ai-labs.github.io/llm-compliance/): what LLM compliance means, why models break rules they can recite, how PACT measures it, FAQ.
+- [AI agent compliance](https://trace-ai-labs.github.io/ai-agent-compliance/): what makes enterprise AI agents follow rules (incentives, framing, authority, peers, pushback), from the AIES 2026 study.
+- [LLM pressure testing](https://trace-ai-labs.github.io/llm-pressure-testing/): pressure testing vs red teaming, the nine pressure families, the pushback turn, results across 24 models.
+
 ## Topics
 
 AI agent compliance, LLM compliance benchmark, LLM pressure testing, social pressure and sycophancy, multi-turn pushback, rule following and policy adherence, system prompt adherence, AI incentives and principal-agent problems, enterprise AI governance, regulated-domain AI safety, honesty and deception under pressure, agentic evaluation, explainable and cost-aware model routing.
