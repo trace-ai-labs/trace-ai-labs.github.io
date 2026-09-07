@@ -187,9 +187,8 @@
     font-size: 0.85rem;
     color: var(--muted);
   }
-  .brand { display:flex; align-items:center; gap:14px; }
-  .brand .mark { flex:none; color:var(--text); }
-  .brand h1 { margin:0; }
+  h1.brand { margin:0 0 0.6rem; line-height:0; }
+  h1.brand img { display:block; height:auto; max-width:100%; width:336px; }
 </style>
 <script type="application/ld+json">
 {
@@ -212,7 +211,7 @@
 <div class="wrap">
 
 <header>
-  <div class="brand"><svg class="mark" viewBox="0 0 64 64" width="44" height="44" aria-hidden="true" focusable="false"><path d="M15 41 H30 V25 H46" fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="46" cy="25" r="6" fill="#2D6EF5"/></svg><h1>TRACE AI Labs</h1></div>
+  <h1 class="brand"><picture><source srcset="/assets/brand/logo-horizontal-on-dark@2x.png" media="(prefers-color-scheme: dark)"><img src="/assets/brand/logo-horizontal@2x.png" alt="TRACE AI Labs" width="336" height="64" fetchpriority="high"></picture></h1>
   <p class="tagline">Trustworthy Routing, Agents, Compliance, and Efficiency</p>
   <p class="meta-links">
     <a href="https://github.com/trace-ai-labs">GitHub</a>
