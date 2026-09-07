@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 170" width="340" height="170" role="img" aria-label="TRACE AI Labs">
+  <title>TRACE AI Labs — stacked lockup with tagline</title>
+  <g transform="translate(138,8)">
+    <path d="M15 41 H30 V25 H46" fill="none" stroke="#12161B" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="46" cy="25" r="6" fill="#2D6EF5" />
+  </g>
+  <text x="170" y="112" text-anchor="middle" font-family="Inter, ui-sans-serif, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="28" letter-spacing="1.6" fill="#12161B">
+    <tspan font-weight="700">TRACE</tspan><tspan font-weight="400" fill-opacity="0.5" dx="8">AI LABS</tspan>
+  </text>
+  <text x="170" y="140" text-anchor="middle" font-family="Inter, ui-sans-serif, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="11" letter-spacing="0.25" fill="#12161B" fill-opacity="0.55">Trustworthy Routing, Agents, Compliance, and Efficiency</text>
+</svg>

@@ -1,0 +1,11 @@
+{
+  "name": "TRACE AI Labs",
+  "short_name": "TRACE",
+  "icons": [
+    { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" }
+  ],
+  "theme_color": "#12161B",
+  "background_color": "#FBFAF7",
+  "display": "standalone"
+}

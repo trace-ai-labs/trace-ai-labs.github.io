@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 336 64" width="336" height="64" role="img" aria-label="TRACE AI Labs">
+  <title>TRACE AI Labs — horizontal lockup</title>
+  <path d="M15 41 H30 V25 H46" fill="none" stroke="#12161B" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="46" cy="25" r="6" fill="#2D6EF5" />
+  <text x="70" y="43" font-family="Inter, ui-sans-serif, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="30" letter-spacing="1.7" fill="#12161B">
+    <tspan font-weight="700">TRACE</tspan><tspan font-weight="400" fill-opacity="0.5" dx="9">AI LABS</tspan>
+  </text>
+</svg>

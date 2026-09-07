@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="TRACE AI Labs">
+  <title>TRACE AI Labs — trail mark for dark backgrounds</title>
+  <path d="M15 41 H30 V25 H46" fill="none" stroke="#FBFAF7" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="46" cy="25" r="6" fill="#2D6EF5" />
+</svg>
